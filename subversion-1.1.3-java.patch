@@ -1,0 +1,11 @@
+--- subversion-1.4.3/build/ac-macros/java.m4.java
++++ subversion-1.4.3/build/ac-macros/java.m4
+@@ -82,7 +82,7 @@
+     if test "$os_arch" = "Darwin"; then
+       AC_MSG_WARN([You may need to install the latest Java Development package from http://connect.apple.com/.  Apple no longer includes the JNI header files by default on Java updates.])
+     fi
+-    JDK_SUITABLE=no
++    JDK_SUITABLE=yes
+   fi
+   AC_MSG_RESULT([$JDK_SUITABLE])
+ 
