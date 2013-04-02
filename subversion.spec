@@ -17,7 +17,7 @@
 Summary: A Modern Concurrent Version Control System
 Name: subversion
 Version: 1.6.11
-Release: 2%{?dist}
+Release: 2%{?dist}.2
 License: ASL 1.1
 Group: Development/Tools
 URL: http://subversion.apache.org/
@@ -33,6 +33,10 @@ Patch3: subversion-1.6.1-rpath.patch
 Patch6: subversion-1.6.11-pie.patch
 Patch7: subversion-1.1.3-java.patch
 Patch8: subversion-1.6.6-kwallet.patch
+# Security fixes
+Patch20: subversion-1.6.11-CVE-2010-3315.patch
+Patch21: subversion-1.6.11-CVE-2010-4539.patch
+Patch22: subversion-1.6.11-CVE-2010-4644.patch
 BuildRequires: autoconf, libtool, python, python-devel, texinfo, which
 BuildRequires: db4-devel >= 4.1.25, swig >= 1.3.24, gettext
 BuildRequires: apr-devel >= 1.3.0, apr-util-devel >= 1.3.0
@@ -158,6 +162,10 @@ cd ../../..
 %patch7 -p1 -b .java
 %endif
 %patch8 -p1 -b .kwallet
+
+%patch20 -p1 -b .cve3315
+%patch21 -p1 -b .cve4539
+%patch22 -p1 -b .cve4644
 
 sed -i -e 's|^XSL="$dir/|XSL="%{_datadir}/svn2cl/|' \
         contrib/client-side/svn2cl/svn2cl.sh
@@ -425,6 +433,12 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_mandir}/man1/svn2cl.1*
 
 %changelog
+* Thu Jan 27 2011 Joe Orton <jorton@redhat.com> - 1.6.11-2.2
+- add security fixes for CVE-2010-4644, CVE-2010-4539 (#672678)
+
+* Wed Oct 13 2010 Joe Orton <jorton@redhat.com> - 1.6.11-2.1
+- add security fix for CVE-2010-3315 (#640322)
+
 * Fri Sep  3 2010 Joe Orton <jorton@redhat.com> - 1.6.11-2
 - restore PIE support (#629940)
 - build using GCJ
